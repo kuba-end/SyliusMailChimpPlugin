@@ -1,9 +1,11 @@
 
-## Installation
+## Installation without symfony/flex
 ***
+Complete all steps from instruction before execute:
 ```bash
 $ composer require bitbag/mailchimp-plugin
 ```
+to avoid inconvenience.
 
 Add plugin dependencies to your `config/bundles.php` file:
 ```php
@@ -11,6 +13,16 @@ return [
     ...
     BitBag\SyliusMailChimpPlugin\BitBagSyliusMailChimpPlugin::class => ['all' => true],
 ];
+```
+Add parameters to your `config/packages/_sylius.yaml`:
+```yaml
+# config/packages/_sylius.yaml
+
+paramteres:
+    ...
+    mailchimp.api_key: '%env(resolve:MAIL_CHIMP_API_KEY)%'
+    mailchimp.list_id: '%env(resolve:MAIL_CHIMP_LIST_ID)%'
+    mailchimp.webhook_secret: '%env(resolve:MAIL_CHIMP_WEBHOOK_SECRET)%'
 ```
 
 Import routing **on top** of your `config/routes.yaml` file:
@@ -66,4 +78,6 @@ Add these javascripts to the layout template that includes your subscription for
 That's the simplest and fastest way to integrate the jQuery plugin. If you need to customize it, simply take a look at
 [bitbag-mailchimp-plugin-newsletter.js](src/Resources/public/bitbag-mailchimp-plugin-newsletter.js), create your own `*.js` plugin and
 import it in your main `Gulpfile.js`.
+
+## Installation with symfony/flex
 
