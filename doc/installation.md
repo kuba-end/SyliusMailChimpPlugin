@@ -81,3 +81,19 @@ import it in your main `Gulpfile.js`.
 
 ## Installation with symfony/flex
 
+Run:
+```bash
+$ composer require bitbag/mailchimp-plugin
+```
+Include the newsletter in your template:
+```twig
+{% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
+```
+Add these javascripts to the layout template that includes your subscription form imported in the previous steps
+```html
+<script src="{{ asset('path/to/jquery.js') }}"></script>
+<script src="{{ asset('bundles/bitbagsyliusmailchimpplugin/bitbag-mailchimp-plugin-newsletter.js') }}"></script>
+<script>
+    $('#footer-newsletter-form').joinNewsletter();
+</script>
+```
