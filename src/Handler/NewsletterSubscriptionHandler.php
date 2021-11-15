@@ -125,26 +125,29 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
         if (false === $response) {
             throw new BadRequestHttpException(
-                sprintf('Mailchimp returned false instead of response array, last error : %s',
-                    $this->mailChimp->getLastError())
+                sprintf(
+                    'Mailchimp returned false instead of response array, last error : %s',
+                    $this->mailChimp->getLastError()
+                )
             );
         }
 
         Assert::keyExists($response, 'status');
 
-        if ($response['status'] === Response::HTTP_NOT_FOUND) {
+        if (Response::HTTP_NOT_FOUND === $response['status']) {
             $validListIds = $this->getValidMailchimpListIds();
             $concatenatedList = implode(',', $validListIds);
 
             throw new BadRequestHttpException(
-                sprintf('Mailchimp returned %1$i code, is the MAIL_CHIMP_LIST_ID [ %2$s ] one of available ones: [ %3$s ] ?',
+                sprintf(
+                    'Mailchimp returned %1$i code, is the MAIL_CHIMP_LIST_ID [ %2$s ] one of available ones: [ %3$s ] ?',
                     Response::HTTP_NOT_FOUND,
                     $this->listId,
                     $concatenatedList
                 )
             );
         }
-        if ($response['status'] !== 'subscribed') {
+        if ('subscribed' !== $response['status']) {
             throw new BadRequestHttpException(
                 sprintf('Response status is %s instead of %s', $response['status'], 'subscribed')
             );
@@ -168,8 +171,10 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
         if (false === $response) {
             throw new BadRequestHttpException(
-                sprintf('Mailchimp returned false instead of response array, last error : %s',
-                    $this->mailChimp->getLastError())
+                sprintf(
+                    'Mailchimp returned false instead of response array, last error : %s',
+                    $this->mailChimp->getLastError()
+                )
             );
         }
 

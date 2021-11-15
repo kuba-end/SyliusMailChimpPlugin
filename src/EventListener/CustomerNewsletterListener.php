@@ -41,7 +41,7 @@ final class CustomerNewsletterListener
             );
         }
 
-        $customer->isSubscribedToNewsletter() === false ? $this->unsubscribe($customer) : $this->subscribe($customer);
+        false === $customer->isSubscribedToNewsletter() ? $this->unsubscribe($customer) : $this->subscribe($customer);
     }
 
     public function customerPostUpdateEvent(GenericEvent $event): void

@@ -66,7 +66,7 @@ final class WebhookValidator
 
         $errors = [];
 
-        if (count($violations) === 0) {
+        if (0 === count($violations)) {
             return $errors;
         }
 
